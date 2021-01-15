@@ -1,9 +1,47 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-
-import Bio from "../components/bio"
+import styled from "styled-components"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+
+const Article = styled.div`
+  header {
+    margin-bottom: 60px;
+
+    h1 {
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+`
+
+const OtherPosts = styled.div`
+  text-align: center;
+  margin: 100px 0 20px;
+  position: relative;
+
+  span {
+    position: relative;
+    padding: 5px 10px;
+    background-color: #fff;
+    color: var(--color-text-light);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  hr {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin-top: 13px;
+    background-color: var(--color-accent);
+  }
+`
 
 const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
@@ -16,11 +54,7 @@ const BlogPostTemplate = ({ data, location }) => {
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
       />
-      <article
-        className="blog-post"
-        itemScope
-        itemType="http://schema.org/Article"
-      >
+      <Article itemScope itemType="http://schema.org/Article">
         <header>
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
           <p>{post.frontmatter.date}</p>
@@ -29,11 +63,11 @@ const BlogPostTemplate = ({ data, location }) => {
           dangerouslySetInnerHTML={{ __html: post.html }}
           itemProp="articleBody"
         />
-        <hr />
-        <footer>
-          <Bio />
-        </footer>
-      </article>
+        <OtherPosts>
+          <hr />
+          <span>Other Posts</span>
+        </OtherPosts>
+      </Article>
       <nav className="blog-post-nav">
         <ul
           style={{

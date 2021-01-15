@@ -1,20 +1,33 @@
-/**
- * Bio component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
-
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Image from "gatsby-image"
+import styled from "styled-components"
+
+const BioDiv = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 60px;
+
+  p {
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+`
+
+const Avatar = styled.div`
+  margin-right: 20px;
+`
+
+const Intro = styled.div`
+  margin-bottom: 0;
+`
 
 const Bio = () => {
   const data = useStaticQuery(graphql`
     query BioQuery {
-      avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
+      avatar: file(absolutePath: { regex: "/avatar.png/" }) {
         childImageSharp {
-          fixed(width: 50, height: 50, quality: 95) {
+          fixed(width: 70, height: 70, quality: 100) {
             ...GatsbyImageSharpFixed
           }
         }
@@ -25,9 +38,6 @@ const Bio = () => {
             name
             summary
           }
-          social {
-            twitter
-          }
         }
       }
     }
@@ -35,32 +45,28 @@ const Bio = () => {
 
   // Set these values by editing "siteMetadata" in gatsby-config.js
   const author = data.site.siteMetadata?.author
-  const social = data.site.siteMetadata?.social
-
   const avatar = data?.avatar?.childImageSharp?.fixed
 
   return (
-    <div className="bio">
+    <BioDiv>
       {avatar && (
-        <Image
-          fixed={avatar}
-          alt={author?.name || ``}
-          className="bio-avatar"
-          imgStyle={{
-            borderRadius: `50%`,
-          }}
-        />
+        <Avatar>
+          <Image fixed={avatar} alt={author?.name || ``} />
+        </Avatar>
       )}
-      {author?.name && (
+      <Intro>
         <p>
-          Written by <strong>{author.name}</strong> {author?.summary || null}
-          {` `}
-          <a href={`https://twitter.com/${social?.twitter || ``}`}>
-            You should follow them on Twitter
+          Hi, I'm <strong>Jinn Wang</strong>. Frontend developer in Vancouver.
+        </p>
+        <p>
+          I blog about web development and JavaScript. See more side projects
+          at: &nbsp;
+          <a href="https://jinnwang.site/" target="_blank" rel="noreferrer">
+            jinnwang.site
           </a>
         </p>
-      )}
-    </div>
+      </Intro>
+    </BioDiv>
   )
 }
 
