@@ -42,5 +42,4 @@ function setHighlight() {
 ```
 
 #### Live Demo 
-<iframe width="100%" height="300" src="//jsfiddle.net/jinnwang/3nk9wocp/2/embedded/js,html,css,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
-
+<iframe width="100%" height="500" src="//jsfiddle.net/jinnwang/1qcozy7g/embedded/result,js,html,css/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
