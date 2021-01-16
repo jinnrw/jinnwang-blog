@@ -61,8 +61,8 @@ const Bio = () => {
         <p>
           I blog about web development and JavaScript. See more side projects
           at: &nbsp;
-          <a href="https://jinnwang.site/" target="_blank" rel="noreferrer">
-            jinnwang.site
+          <a href="https://jinnwang.com/" target="_blank" rel="noreferrer">
+            jinnwang.com
           </a>
         </p>
       </Intro>
