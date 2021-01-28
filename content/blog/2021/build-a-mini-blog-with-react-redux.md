@@ -1,11 +1,12 @@
 ---
 date: "2021-01-26"
-title: "Build a simple blog with React Redux"
-description: "Build a simple blog with React Redux "
+title: "Build a mini blog with React Redux"
+description: "Build a mini blog with React Redux "
 tags: ["React", Redux", "TailwindCSS"]
 ---
 
-In this post, we'll create a simple blog, using React Redux, that allows users to add and delete posts. The source code of this project is in my GitHub [repo](https://github.com/jinnrw/react-redux-testing-with-enzyme). The main focus of this post is to introduce Redux and how it integrates with a React application, you can look up the source code for details.  
+In this post, we'll create a mini blog that allows users to add and delete posts. 
+The source code of this project is in my GitHub [repo](https://github.com/jinnrw/mini-blog-UI). And visit the [demo](https://mini-blog-ui.vercel.app/) here. The main focus of this post is to introduce Redux and how it integrates with a React application, you can look up the source code for more details.  
 
 #### Table of Contents
 - Setup A React app
