@@ -93,10 +93,17 @@ const addPost = (state, post) => {
   return newState;
 };
 
-export default (state = INITIAL_STATE, action) => {
+const deletePost = (state, id) => {
+  const newState = [...state];
+  return newState.filter((post) => post.id !== id);
+};
+
+export const PostsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case types.ADD_POST:
       return addPost(state, action.payload);
+    case types.DELETE_POST:
+      return deletePost(state, action.payload);
     default:
       return state;
   }
@@ -107,7 +114,7 @@ export default (state = INITIAL_STATE, action) => {
 
 An action is a plain JavaScript object to describe something that happened in the application. In our example, when adding a post, we dispatch an action, `addPost` , which describes a new post has been added, and passes the post data in payload property. Note that `addPost` is actually an action creator, which is a function returns an action object.   
 
-```jsx
+```js
 // actions/index.js
 import { types } from "./types";
 
@@ -116,9 +123,15 @@ export const addPost = (post) => ({
   payload: post,
 });
 
+export const deletePost = (id) => ({
+  type: types.DELETE_POST,
+  payload: id,
+});
+
 // actions/types.js
 export const types = {
-  ADD_POST: 'addPost'
+  ADD_POST: 'addPost',
+  DELETE_POST: 'deletePost'
 };
 ```
 
@@ -159,9 +172,9 @@ In any of the React components, if you want to read states from the Redux store 
 > If it’s an object full of action creators, each action creator will be turned into a prop function that automatically dispatches its action when called. Note: We recommend using this “object shorthand” form.  
 > -- React Redux api
 
-**Posts Component**
+**Connecting Posts Component**
 
-We only read states in this component, so we can skip `mapDispatchToProps`.
+We only need to read states in the Posts component, so we can pass in `mapStateToProps` only.
 
 ```jsx
 // Posts.js
@@ -173,9 +186,9 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps)(Posts);
 ```
 
-**AddPost Component**
+**Connecting AddPost & DeletePost Components**
 
-In this component, we dispatch an action when the 'Add' button is clicked, so add addPost in `mapDispatchToProps`, and pass null as `mapStateToProps` cause we don't need to read any state.
+We only need to dispatch an action when the 'Add' button is clicked, so we specify `addPost` in `mapDispatchToProps`, and pass `null` as `mapStateToProps` cause we don't need to read any state. It works the same on `DeletePost` component.
 
 ```jsx
 // AddPost.js
@@ -183,6 +196,12 @@ import { addPost } from "../../actions";
 ...
 const mapDispatchToProps = { addPost };
 export default connect(null, mapDispatchToProps)(AddPost);
+
+// DeletePost.js
+import { deletePost } from "../../actions";
+...
+const mapDispatchToProps = { deletePost };
+export default connect(null, mapDispatchToProps)(DeletePost);
 ```
 
 #### Styling
