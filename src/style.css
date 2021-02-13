@@ -21,7 +21,7 @@
   --spacing-20: 5rem;
   --spacing-24: 6rem;
   --spacing-32: 8rem;
-  --fontFamily-sans: Inter,-apple-system,BlinkMacSystemFont,Roboto,Segoe UI,Helvetica,Arial,sans-serif;
+  --fontFamily-sans: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
   --font-body: var(--fontFamily-sans);
   --font-heading: var(--fontFamily-sans);
   --fontWeight-normal: 400;
@@ -36,7 +36,7 @@
   --lineHeight-normal: 1.5;
   --lineHeight-relaxed: 1.7;
   /* 1.200 Minor Third Type Scale */
-  --fontSize-0: 0.833rem;
+  --fontSize-0: 0.875rem;
   --fontSize-1: 1rem;
   --fontSize-2: 1.2rem;
   --fontSize-3: 1.44rem;
@@ -48,17 +48,16 @@
   --color-primary: #005b99;
   --color-text: #2e353f;
   --color-text-light: #4f5969;
-  --color-heading: #1a202c;
+  --color-heading: rgb(36, 42, 49);
   --color-heading-black: black;
   --color-accent: #d1dce5;
   --color-light-grey: #fafafa;
+  --color-code-background: #1e1e1e;
 }
 
 /* HTML elements */
 
-*,
-:after,
-:before {
+*, :after, :before {
   box-sizing: border-box;
 }
 
@@ -83,24 +82,14 @@ hr {
 
 /* Heading */
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  margin-top: var(--spacing-12);
-  margin-bottom: var(--spacing-6);
+  margin: 36px 0px 24px;
   line-height: var(--lineHeight-tight);
   letter-spacing: -0.025em;
 }
 
-h2,
-h3,
-h4,
-h5,
-h6 {
+h2, h3, h4, h5, h6 {
   font-weight: var(--fontWeight-bold);
   color: var(--color-heading);
 }
@@ -112,11 +101,11 @@ h1 {
 }
 
 h2 {
-  font-size: var(--fontSize-5);
+  font-size: var(--fontSize-3);
 }
 
 h3 {
-  font-size: var(--fontSize-4);
+  font-size: var(--fontSize-3);
 }
 
 h4 {
@@ -141,23 +130,20 @@ p {
   padding: var(--spacing-0);
 }
 
-ul,
-ol {
+ul, ol {
   margin: 0;
   padding: var(--spacing-0);
-  list-style-position: outside;
   list-style-image: none;
   list-style-type: disc;
-  list-style-position: inside;
+  padding-left: 20px;
 }
 
-ul li,
-ol li {
+ul li, ol li {
   padding-left: var(--spacing-0);
   margin-bottom: calc(var(--spacing-8) / 2);
 }
 
-li > p {
+li>p {
   margin-bottom: calc(var(--spacing-8) / 2);
 }
 
@@ -165,7 +151,7 @@ li *:last-child {
   margin-bottom: var(--spacing-0);
 }
 
-li > ul {
+li>ul {
   margin-left: var(--spacing-8);
   margin-top: calc(var(--spacing-8) / 2);
 }
@@ -181,13 +167,36 @@ blockquote {
   margin-bottom: var(--spacing-8);
 }
 
-blockquote > :last-child {
+blockquote> :last-child {
   margin-bottom: var(--spacing-0);
 }
 
-blockquote > ul,
-blockquote > ol {
+blockquote>ul, blockquote>ol {
   list-style-position: inside;
+}
+
+.block-hint {
+  width: 100%;
+  margin: 32px 0px;
+  display: block;
+  padding: 24px 24px 24px 50px;
+  position: relative;
+  border-left: 4px solid;
+  border-radius: 3px;
+  background-color: rgb(245, 247, 249);
+  user-select: auto;
+  border-color: rgb(56, 132, 255);
+}
+
+.block-hint::after {
+  position: absolute;
+  content: '';
+  width: 24px;
+  height: 24px;
+  top: 24px;
+  left: 16px;
+  background: url(../static/info.svg);
+  background-repeat: no-repeat;
 }
 
 table {
@@ -202,6 +211,7 @@ table thead tr th {
 }
 
 /* Mark */
+
 mark {
   background-color: #ffff9d;
 }
@@ -214,9 +224,7 @@ a {
   font-family: var(--font-body);
 }
 
-a:hover,
-a:focus,
-p a {
+a:hover, a:focus, p a {
   text-decoration: underline;
 }
 
@@ -262,8 +270,46 @@ p a {
 }
 
 /* Override Prism.css */
+
 code[class*="language-"], pre[class*="language-"] {
-  font-family: monospace;
+  font-size: var(--fontSize-0);
+  border-radius: 3px;
+}
+
+:not(pre)>code[class*="language-"] {
+  color: inherit;
+  margin: 0px 1px;
+  display: inline-block;
+  padding: 3px 6px;
+  font-size: 85%;
+  max-width: 100%;
+  font-family: "Source Code Pro", Consolas, Menlo, monospace;
+  border-radius: 3px;
+  background-color: rgb(245, 247, 249);
+}
+
+/* line numbering */
+
+.gatsby-highlight {
+  background-color: var(--color-code-background);
+  border-radius: 0.3em;
+  margin: 0.5em 0;
+  padding: 1em;
+  overflow: auto;
+}
+
+.gatsby-highlight pre[class*="language-"].line-numbers {
+  padding: 0;
+  padding-left: 2.8em;
+  overflow: initial;
+}
+
+.gatsby-highlight .line-numbers .line-numbers-rows {
+  border-right: none;
+}
+
+.gatsby-highlight .line-numbers .line-numbers-rows>span:before {
+  color: rgb(92, 105, 117);
 }
 
 /* Media queries */
@@ -273,8 +319,7 @@ code[class*="language-"], pre[class*="language-"] {
     padding: var(--spacing-0) var(--spacing-0) var(--spacing-0) var(--spacing-4);
     margin-left: var(--spacing-0);
   }
-  ul,
-  ol {
+  ul, ol {
     list-style-position: inside;
   }
 }
